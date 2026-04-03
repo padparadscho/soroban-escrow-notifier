@@ -1,0 +1,48 @@
+# Pipeline Backfill
+#
+# One-time historical backfill for SHx escrow contract events on Stellar Mainnet Network
+#
+# * Validate: goldsky turbo validate pipelines/pipeline-backfill.yaml
+# * Deploy: goldsky turbo apply pipelines/pipeline-backfill.yaml
+# * Monitor: goldsky turbo logs soroban-escrow-notifier-backfill
+# * Terminate: goldsky turbo delete soroban-escrow-notifier-backfill
+
+name: soroban-escrow-notifier-backfill
+resource_size: l
+description: One-time historical backfill for SHx escrow contract events on Stellar Mainnet Network
+
+sources:
+  events:
+    type: dataset
+    dataset_name: stellar_mainnet.events
+    version: 1.2.0
+    start_at: 57577223
+    fetch_batch_size: 100
+    fetch_parallelism: 4
+
+transforms:
+  filtered_events:
+    type: sql
+    primary_key: id
+    sql: |
+      SELECT
+        id,
+        topics,
+        data,
+        transaction_hash,
+        ledger_sequence,
+        ledger_closed_at
+      FROM events
+      WHERE
+        contract_id = 'CCA5HAZCPEYXD7JBKAJCVUZUXAK7V5ZFU3QMJO33OJH2OHL3OGLS2P7M'
+        AND type = 'contract'
+        AND in_successful_contract_call = true
+
+sinks:
+  events_sink:
+    type: postgres
+    from: filtered_events
+    schema: public
+    table: events
+    secret_name: NEON_DB_SECRET
+    primary_key: id
