@@ -1,0 +1,36 @@
+{
+  "name": "soroban-escrow-notifier",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A multi-platform notification system that monitors a specified Soroban escrow smart contract and broadcasts formatted notifications to configured platforms.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "migrate": "NODE_OPTIONS='--loader ts-node/esm' ts-node ./src/database/migrate.ts",
+    "migrate:down": "MIGRATE_OPTION=down NODE_OPTIONS='--loader ts-node/esm' ts-node ./src/database/migrate.ts",
+    "migrate:list": "MIGRATE_OPTION=list NODE_OPTIONS='--loader ts-node/esm' ts-node ./src/database/migrate.ts",
+    "generate-schema": "kysely-codegen --dialect postgres --out-file ./src/database/schema.ts"
+  },
+  "author": "Padparadscho <contact@padparadscho.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/padparadscho/soroban-escrow-notifier.git"
+  },
+  "bugs": "https://github.com/padparadscho/soroban-escrow-notifier/issues",
+  "homepage": "https://github.com/padparadscho/soroban-escrow-notifier#readme",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "dotenv": "17.3.0",
+    "kysely": "0.28.15",
+    "pg": "8.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "25.5.0",
+    "@types/pg": "8.20.0",
+    "kysely-codegen": "0.20.0",
+    "ts-node": "10.9.2",
+    "typescript": "6.0.2"
+  },
+  "packageManager": "pnpm@10.33.0"
+}

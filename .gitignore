@@ -1,2 +1,16 @@
+# Dependency directories
+node_modules/
+
+# dotenv environment variable files
+.env
+.env.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+
 # Pipelines
 pipelines/pipeline-testnet.yaml
