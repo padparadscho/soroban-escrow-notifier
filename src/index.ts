@@ -14,7 +14,13 @@ import {
 } from './messages';
 import { getEscrowBalance } from './soroban/utils';
 import { parseEscrowEvent, parseTransferEvent } from './soroban/parser';
+import { TwitterAdapter } from './adapters';
 import { CONFIG } from './config';
+
+/**
+ * Active platform adapters for sending notifications
+ */
+const adapters = [new TwitterAdapter()];
 
 /**
  * Flag indicating whether the polling loop is active
@@ -23,12 +29,15 @@ let isRunning = true;
 
 /**
  * Sends a notification message to all enabled platforms concurrently
- * NOTES: Logs output only for now.
+ * NOTE: A single adapter failure does not abort the whole batch
  * @param message - Message to send
  */
 async function notifyPlatforms(message: string): Promise<void> {
-  console.log(message);
-  return Promise.resolve();
+  const enabledAdapters = adapters.filter((adapter) => adapter.isEnabled());
+
+  await Promise.allSettled(
+    enabledAdapters.map((adapter) => adapter.send(message)),
+  );
 }
 
 /**
@@ -107,7 +116,13 @@ async function poll(): Promise<void> {
  * Registers shutdown handlers and starts the polling loop
  */
 async function main(): Promise<void> {
-  console.log('Starting notifier');
+  const enabledAdapters = adapters
+    .filter((a) => a.isEnabled())
+    .map((a) => a.constructor.name);
+
+  console.log(
+    `Starting notifier. Adapters: ${enabledAdapters.join(', ') || 'none'}`,
+  );
 
   const shutdown = (): void => {
     isRunning = false;
