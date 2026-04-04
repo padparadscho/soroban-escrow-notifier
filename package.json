@@ -10,7 +10,9 @@
     "migrate": "NODE_OPTIONS='--loader ts-node/esm' ts-node ./src/database/migrate.ts",
     "migrate:down": "MIGRATE_OPTION=down NODE_OPTIONS='--loader ts-node/esm' ts-node ./src/database/migrate.ts",
     "migrate:list": "MIGRATE_OPTION=list NODE_OPTIONS='--loader ts-node/esm' ts-node ./src/database/migrate.ts",
-    "generate-schema": "kysely-codegen --dialect postgres --out-file ./src/database/schema.ts"
+    "generate-schema": "kysely-codegen --dialect postgres --out-file ./src/database/schema.ts",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
   },
   "author": "Padparadscho <contact@padparadscho.com>",
   "repository": {
@@ -26,11 +28,15 @@
     "pg": "8.20.0"
   },
   "devDependencies": {
+    "@eslint/js": "10.0.1",
     "@types/node": "25.5.0",
     "@types/pg": "8.20.0",
+    "eslint": "10.1.0",
+    "eslint-config-prettier": "10.1.8",
     "kysely-codegen": "0.20.0",
     "ts-node": "10.9.2",
-    "typescript": "6.0.2"
+    "typescript": "6.0.2",
+    "typescript-eslint": "8.58.0"
   },
   "packageManager": "pnpm@10.33.0"
 }
