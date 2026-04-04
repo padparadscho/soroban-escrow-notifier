@@ -20,6 +20,9 @@ importers:
       pg:
         specifier: 8.20.0
         version: 8.20.0
+      twitter-api-v2:
+        specifier: 1.29.0
+        version: 1.29.0
     devDependencies:
       '@eslint/js':
         specifier: 10.0.1
@@ -917,6 +920,9 @@ packages:
       '@swc/wasm':
         optional: true
 
+  twitter-api-v2@1.29.0:
+    resolution: {integrity: sha512-v473q5bwme4N+DWSg6qY+JCvfg1nSJRWwui3HUALafxfqCvVkKiYmS/5x/pVeJwTmyeBxexMbzHwnzrH4h6oYQ==}
+
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
@@ -1799,6 +1805,8 @@ snapshots:
       typescript: 6.0.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+
+  twitter-api-v2@1.29.0: {}
 
   type-check@0.4.0:
     dependencies:

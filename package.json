@@ -32,7 +32,8 @@
     "@stellar/stellar-sdk": "15.0.0",
     "dotenv": "17.3.0",
     "kysely": "0.28.15",
-    "pg": "8.20.0"
+    "pg": "8.20.0",
+    "twitter-api-v2": "1.29.0"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

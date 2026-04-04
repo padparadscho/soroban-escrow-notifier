@@ -19,6 +19,16 @@ export const CONFIG = {
 
   DATABASE_URL: process.env.DATABASE_URL || '',
   POLLING_INTERVAL: parseInt(process.env.POLLING_INTERVAL || '60000', 10),
+
+  TWITTER: {
+    _ENABLE: process.env.ENABLE_TWITTER === 'true',
+    _APP_KEY: process.env.TWITTER_APP_KEY || '',
+    _APP_SECRET: process.env.TWITTER_APP_SECRET || '',
+    _ACCESS_TOKEN: process.env.TWITTER_ACCESS_TOKEN || '',
+    _ACCESS_SECRET: process.env.TWITTER_ACCESS_SECRET || '',
+  },
+
+  DRY_RUN: process.env.DRY_RUN === 'true',
 } as const;
 
 if (!CONFIG.SOROBAN_ESCROW_CONTRACT_ID) {
