@@ -12,7 +12,9 @@
     "migrate:list": "MIGRATE_OPTION=list NODE_OPTIONS='--loader ts-node/esm' ts-node ./src/database/migrate.ts",
     "generate-schema": "kysely-codegen --dialect postgres --out-file ./src/database/schema.ts",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix"
+    "lint:fix": "eslint src/ --fix",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/"
   },
   "author": "Padparadscho <contact@padparadscho.com>",
   "repository": {
@@ -34,6 +36,7 @@
     "eslint": "10.1.0",
     "eslint-config-prettier": "10.1.8",
     "kysely-codegen": "0.20.0",
+    "prettier": "3.8.1",
     "ts-node": "10.9.2",
     "typescript": "6.0.2",
     "typescript-eslint": "8.58.0"
