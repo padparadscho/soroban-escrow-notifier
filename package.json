@@ -7,6 +7,10 @@
     "node": ">=20"
   },
   "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
     "migrate": "NODE_OPTIONS='--loader ts-node/esm' ts-node ./src/database/migrate.ts",
     "migrate:down": "MIGRATE_OPTION=down NODE_OPTIONS='--loader ts-node/esm' ts-node ./src/database/migrate.ts",
     "migrate:list": "MIGRATE_OPTION=list NODE_OPTIONS='--loader ts-node/esm' ts-node ./src/database/migrate.ts",
@@ -25,6 +29,7 @@
   "homepage": "https://github.com/padparadscho/soroban-escrow-notifier#readme",
   "license": "GPL-3.0-only",
   "dependencies": {
+    "@stellar/stellar-sdk": "15.0.0",
     "dotenv": "17.3.0",
     "kysely": "0.28.15",
     "pg": "8.20.0"
