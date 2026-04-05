@@ -33,6 +33,12 @@ export const CONFIG = {
     _WEBHOOK_URL: process.env.DISCORD_WEBHOOK_URL || '',
   },
 
+  TELEGRAM: {
+    _ENABLE: process.env.ENABLE_TELEGRAM === 'true',
+    _BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || '',
+    _CHAT_ID: process.env.TELEGRAM_CHAT_ID || '',
+  },
+
   DRY_RUN: process.env.DRY_RUN === 'true',
 } as const;
 
