@@ -20,3 +20,4 @@ export interface NotifierAdapter {
 }
 
 export { TwitterAdapter } from './twitter';
+export { DiscordAdapter } from './discord';

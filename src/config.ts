@@ -28,6 +28,11 @@ export const CONFIG = {
     _ACCESS_SECRET: process.env.TWITTER_ACCESS_SECRET || '',
   },
 
+  DISCORD: {
+    _ENABLE: process.env.ENABLE_DISCORD === 'true',
+    _WEBHOOK_URL: process.env.DISCORD_WEBHOOK_URL || '',
+  },
+
   DRY_RUN: process.env.DRY_RUN === 'true',
 } as const;
 

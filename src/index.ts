@@ -14,13 +14,13 @@ import {
 } from './messages';
 import { getEscrowBalance } from './soroban/utils';
 import { parseEscrowEvent, parseTransferEvent } from './soroban/parser';
-import { TwitterAdapter } from './adapters';
+import { DiscordAdapter, TwitterAdapter } from './adapters';
 import { CONFIG } from './config';
 
 /**
  * Active platform adapters for sending notifications
  */
-const adapters = [new TwitterAdapter()];
+const adapters = [new TwitterAdapter(), new DiscordAdapter()];
 
 /**
  * Flag indicating whether the polling loop is active
