@@ -16,5 +16,8 @@ Thumbs.db
 # Editor directories and files
 .vscode/
 
+# Docker
+docker-compose.override.yml
+
 # Pipelines
 pipelines/pipeline-testnet.yaml
