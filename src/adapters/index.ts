@@ -21,3 +21,4 @@ export interface NotifierAdapter {
 
 export { TwitterAdapter } from './twitter';
 export { DiscordAdapter } from './discord';
+export { TelegramAdapter } from './telegram';
