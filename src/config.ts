@@ -13,9 +13,13 @@ export const CONFIG = {
   NETWORK_PASSPHRASE: process.env.NETWORK_PASSPHRASE || '',
   SOROBAN_ESCROW_CONTRACT_ID: process.env.SOROBAN_ESCROW_CONTRACT_ID || '',
   STELLAR_ASSET_CONTRACT_ID: process.env.STELLAR_ASSET_CONTRACT_ID || '',
+  STELLAR_ASSET_ID: process.env.STELLAR_ASSET_ID || '',
   STELLAR_EXPLORER_BASE_URL:
     process.env.STELLAR_EXPLORER_BASE_URL ||
     'https://stellar.expert/explorer/public',
+  STELLAR_EXPERT_BASE_URL:
+    process.env.STELLAR_EXPERT_BASE_URL ||
+    'https://api.stellar.expert/explorer/public',
 
   DATABASE_URL: process.env.DATABASE_URL || '',
   POLLING_INTERVAL: parseInt(process.env.POLLING_INTERVAL || '60000', 10),

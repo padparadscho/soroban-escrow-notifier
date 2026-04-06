@@ -82,3 +82,25 @@ export async function getEscrowBalance(): Promise<string> {
   }
   return '0';
 }
+
+interface StellarExpertResponse {
+  price: number;
+}
+
+/**
+ * Fetches the current unit price in USD from StellarExpert API
+ * @returns Price in USD as string, or "0" if fetch fails or not configured
+ */
+export async function fetchPrice(): Promise<string> {
+  try {
+    const url = `${CONFIG.STELLAR_EXPERT_BASE_URL}/asset/${CONFIG.STELLAR_ASSET_ID}`;
+    const response = await fetch(url);
+
+    if (!response.ok) throw new Error();
+
+    const data = (await response.json()) as StellarExpertResponse;
+    return String(data.price);
+  } catch {
+    return '0';
+  }
+}

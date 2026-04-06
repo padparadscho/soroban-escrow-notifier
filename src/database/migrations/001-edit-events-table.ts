@@ -13,9 +13,15 @@ export async function up(db: Kysely<any>): Promise<void> {
     .alterTable('events')
     .addColumn('escrow_balance', 'varchar(50)')
     .execute();
+
+  await db.schema
+    .alterTable('events')
+    .addColumn('unit_price', 'numeric(20, 12)')
+    .execute();
 }
 
 export async function down(db: Kysely<any>): Promise<void> {
+  await db.schema.alterTable('events').dropColumn('unit_price').execute();
   await db.schema.alterTable('events').dropColumn('escrow_balance').execute();
   await db.schema.alterTable('events').dropColumn('processed').execute();
 }

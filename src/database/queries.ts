@@ -34,31 +34,42 @@ export async function getUnprocessedTransferEvents(): Promise<TransferRow[]> {
 }
 
 /**
- * Marks escrow events as processed and records the escrow balance at processing time
+ * Marks escrow events as processed and records the escrow balance and unit price at processing time
  * @param ids - Event IDs to mark as processed
  * @param escrowBalance - Current total SHx balance in escrow (from RPC query)
+ * @param unitPrice - Current unit price in USD (from StellarExpert API)
  */
 export async function markEscrowEventsProcessed(
   ids: string[],
   escrowBalance: string,
+  unitPrice: string,
 ): Promise<void> {
   await db
     .updateTable('events')
-    .set({ processed: true, escrow_balance: escrowBalance })
+    .set({
+      processed: true,
+      escrow_balance: escrowBalance,
+      unit_price: unitPrice !== '0' ? unitPrice : undefined,
+    })
     .where('id', 'in', ids)
     .execute();
 }
 
 /**
- * Marks transfer events as processed
+ * Marks transfer events as processed and records the unit price at processing time
  * @param ids - Transfer IDs to mark as processed
+ * @param unitPrice - Current unit price in USD (from StellarExpert API)
  */
 export async function markTransferEventsProcessed(
   ids: string[],
+  unitPrice: string,
 ): Promise<void> {
   await db
     .updateTable('transfers')
-    .set({ processed: true })
+    .set({
+      processed: true,
+      unit_price: unitPrice !== '0' ? unitPrice : undefined,
+    })
     .where('id', 'in', ids)
     .execute();
 }
