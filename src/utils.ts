@@ -28,6 +28,23 @@ export function formatAmount(amount: string): string {
 }
 
 /**
+ * Formats a raw amount into USD using the provided unit price
+ * @param amount - Raw amount as a string (e.g., "1000000000")
+ * @param unitPrice - Price per unit in USD as a string (e.g., "0.05")
+ * @returns Formatted USD string (e.g., "$5.00", "$1.2K", "$3.4M")
+ */
+export function formatPrice(amount: string, unitPrice: string): string {
+  const units = Number(BigInt(amount)) / 10_000_000;
+  const price = units * Number(unitPrice);
+
+  if (price >= 1_000_000_000) return `$${(price / 1_000_000_000).toFixed(2)}B`;
+  if (price >= 1_000_000) return `$${(price / 1_000_000).toFixed(2)}M`;
+  if (price >= 1_000) return `$${(price / 1_000).toFixed(2)}K`;
+
+  return `$${price.toFixed(2)}`;
+}
+
+/**
  * Formats a Unix timestamp to a localized date+time string in UTC
  * @param date - Unix timestamp (in milliseconds)
  * @returns Formatted date+time string (e.g., "Mar 24, 2026, 00:00 UTC")

@@ -68,8 +68,8 @@ async function processEscrowEvents(): Promise<void> {
     }
     const message =
       event.type === 'lock'
-        ? formatLockMessage(event, escrowBalance)
-        : formatUnlockMessage(event, escrowBalance);
+        ? formatLockMessage(event, escrowBalance, unitPrice)
+        : formatUnlockMessage(event, escrowBalance, unitPrice);
 
     await notifyPlatforms(message);
     ids.push(row.id);
@@ -92,7 +92,7 @@ async function processTransferEvents(): Promise<void> {
 
   for (const row of rows) {
     const event = parseTransferEvent(row);
-    const message = formatTransferMessage(event);
+    const message = formatTransferMessage(event, unitPrice);
 
     await notifyPlatforms(message);
     ids.push(row.id);
