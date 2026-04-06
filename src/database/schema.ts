@@ -32,6 +32,7 @@ export interface Events {
   processed: Generated<boolean>;
   topics: string | null;
   transaction_hash: string | null;
+  unit_price: Numeric | null;
 }
 
 export interface Transfers {
@@ -44,6 +45,7 @@ export interface Transfers {
   sender: string | null;
   transaction_hash: string | null;
   transfer_type: string | null;
+  unit_price: Numeric | null;
 }
 
 export interface DB {

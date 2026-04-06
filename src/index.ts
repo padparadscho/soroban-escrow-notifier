@@ -12,7 +12,7 @@ import {
   formatUnlockMessage,
   formatTransferMessage,
 } from './messages';
-import { getEscrowBalance } from './soroban/utils';
+import { getEscrowBalance, fetchPrice } from './soroban/utils';
 import { parseEscrowEvent, parseTransferEvent } from './soroban/parser';
 import { DiscordAdapter, TelegramAdapter, TwitterAdapter } from './adapters';
 import { CONFIG } from './config';
@@ -46,8 +46,7 @@ async function notifyPlatforms(message: string): Promise<void> {
 
 /**
  * Processes unprocessed escrow events: sends notifications and marks as processed
- * Queries the current escrow balance once for all events in the batch
- * @param rows - Unprocessed event rows from database
+ * Queries the current escrow balance and unit price once for all events in the batch
  */
 async function processEscrowEvents(): Promise<void> {
   const rows = await getUnprocessedEscrowEvents();
@@ -55,7 +54,10 @@ async function processEscrowEvents(): Promise<void> {
     return;
   }
 
-  const escrowBalance = await getEscrowBalance();
+  const [escrowBalance, unitPrice] = await Promise.all([
+    getEscrowBalance(),
+    fetchPrice(),
+  ]);
   const ids: string[] = [];
 
   for (const row of rows) {
@@ -73,12 +75,12 @@ async function processEscrowEvents(): Promise<void> {
     ids.push(row.id);
   }
 
-  await markEscrowEventsProcessed(ids, escrowBalance);
+  await markEscrowEventsProcessed(ids, escrowBalance, unitPrice);
 }
 
 /**
  * Processes unprocessed transfer events: sends notifications and marks as processed
- * @param rows - Unprocessed transfer rows from database
+ * Queries the current unit price once for all events in the batch
  */
 async function processTransferEvents(): Promise<void> {
   const rows = await getUnprocessedTransferEvents();
@@ -86,7 +88,7 @@ async function processTransferEvents(): Promise<void> {
     return;
   }
 
-  const ids: string[] = [];
+  const [ids, unitPrice] = [[] as string[], await fetchPrice()];
 
   for (const row of rows) {
     const event = parseTransferEvent(row);
@@ -96,7 +98,7 @@ async function processTransferEvents(): Promise<void> {
     ids.push(row.id);
   }
 
-  await markTransferEventsProcessed(ids);
+  await markTransferEventsProcessed(ids, unitPrice);
 }
 
 /**
