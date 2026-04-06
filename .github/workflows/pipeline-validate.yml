@@ -1,0 +1,39 @@
+name: Pipeline Validate
+
+on:
+  pull_request:
+    branches: ['main']
+    paths:
+      - 'pipelines/pipeline.yaml'
+  push:
+    branches: ['main']
+    paths:
+      - 'pipelines/pipeline.yaml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate pipeline
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Validate pipeline
+        shell: bash
+        env:
+          GOLDSKY_API_KEY: ${{ secrets.GOLDSKY_API_KEY }}
+        run: |
+          set -euo pipefail
+          curl -fsSL https://goldsky.com | sh -s -- -f
+          curl -fsSL https://install-turbo.goldsky.com | bash
+          export PATH="$HOME/.goldsky/bin:$PATH"
+          goldsky login --token "$GOLDSKY_API_KEY"
+          goldsky turbo validate pipelines/pipeline-mainnet.yaml
