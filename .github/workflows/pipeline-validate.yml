@@ -4,11 +4,11 @@ on:
   pull_request:
     branches: ['main']
     paths:
-      - 'pipelines/pipeline.yaml'
+      - 'pipelines/pipeline-mainnet.yaml'
   push:
     branches: ['main']
     paths:
-      - 'pipelines/pipeline.yaml'
+      - 'pipelines/pipeline-mainnet.yaml'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
