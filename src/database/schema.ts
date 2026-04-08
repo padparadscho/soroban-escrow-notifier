@@ -35,6 +35,12 @@ export interface Events {
   unit_price: Numeric | null;
 }
 
+export interface Memos {
+  memo: string | null;
+  memo_type: string | null;
+  transaction_hash: string;
+}
+
 export interface Transfers {
   amount: Numeric | null;
   id: string;
@@ -50,5 +56,6 @@ export interface Transfers {
 
 export interface DB {
   events: Events;
+  memos: Memos;
   transfers: Transfers;
 }
