@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import type { NotifierAdapter } from './index';
+import { checkEnabled } from './helpers';
 import { CONFIG } from '../config';
 
 /**
@@ -13,16 +14,10 @@ export class TelegramAdapter implements NotifierAdapter {
    * @returns True if adapter is ready to send notifications
    */
   isEnabled(): boolean {
-    if (!CONFIG.TELEGRAM._ENABLE) {
-      return false;
-    }
-
-    // Allow dry-run without requiring Telegram credentials
-    if (CONFIG.DRY_RUN) {
-      return true;
-    }
-
-    return !!(CONFIG.TELEGRAM._BOT_TOKEN && CONFIG.TELEGRAM._CHAT_ID);
+    return checkEnabled(
+      CONFIG.TELEGRAM._ENABLE,
+      () => !!(CONFIG.TELEGRAM._BOT_TOKEN && CONFIG.TELEGRAM._CHAT_ID),
+    );
   }
 
   /**

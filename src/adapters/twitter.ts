@@ -3,6 +3,7 @@
 
 import { TwitterApi } from 'twitter-api-v2';
 import type { NotifierAdapter } from './index';
+import { checkEnabled } from './helpers';
 import { CONFIG } from '../config';
 
 /**
@@ -16,20 +17,15 @@ export class TwitterAdapter implements NotifierAdapter {
    * @returns True if adapter is ready to send notifications
    */
   isEnabled(): boolean {
-    if (!CONFIG.TWITTER._ENABLE) {
-      return false;
-    }
-
-    // Allow dry-run without requiring Twitter credentials
-    if (CONFIG.DRY_RUN) {
-      return true;
-    }
-
-    return !!(
-      CONFIG.TWITTER._APP_KEY &&
-      CONFIG.TWITTER._APP_SECRET &&
-      CONFIG.TWITTER._ACCESS_TOKEN &&
-      CONFIG.TWITTER._ACCESS_SECRET
+    return checkEnabled(
+      CONFIG.TWITTER._ENABLE,
+      () =>
+        !!(
+          CONFIG.TWITTER._APP_KEY &&
+          CONFIG.TWITTER._APP_SECRET &&
+          CONFIG.TWITTER._ACCESS_TOKEN &&
+          CONFIG.TWITTER._ACCESS_SECRET
+        ),
     );
   }
 

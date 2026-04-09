@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import type { NotifierAdapter } from './index';
+import { checkEnabled } from './helpers';
 import { CONFIG } from '../config';
 
 /**
@@ -9,20 +10,14 @@ import { CONFIG } from '../config';
  */
 export class DiscordAdapter implements NotifierAdapter {
   /**
-   * Checks if the Discord adapter is enabled and has a valid credentials
+   * Checks if the Discord adapter is enabled and has valid credentials
    * @returns True if adapter is ready to send notifications
    */
   isEnabled(): boolean {
-    if (!CONFIG.DISCORD._ENABLE) {
-      return false;
-    }
-
-    // Allow dry-run without requiring Discord credentials
-    if (CONFIG.DRY_RUN) {
-      return true;
-    }
-
-    return !!CONFIG.DISCORD._WEBHOOK_URL;
+    return checkEnabled(
+      CONFIG.DISCORD._ENABLE,
+      () => !!CONFIG.DISCORD._WEBHOOK_URL,
+    );
   }
 
   /**
