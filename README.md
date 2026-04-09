@@ -4,6 +4,14 @@
 > [!WARNING]
 > This project and involved contributors are not affiliated with, endorsed by, or sponsored by Stronghold or any of its affiliates. This is an independent personal project developed for educational and experimental purposes only.
 
+<div align="center">
+
+[![Checks](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/checks.yml/badge.svg)](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/checks.yml)
+[![CodeQL Analysis](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/codeql-analysis.yml)
+[![Pipeline Validate](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/pipeline-validate.yml/badge.svg)](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/pipeline-validate.yml)
+
+</div>
+
 # Soroban Escrow Notifier
 
 A multi-platform notification system that monitors a specified **Soroban escrow smart contract** and broadcasts formatted notifications to configured platforms.
