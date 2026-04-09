@@ -115,6 +115,8 @@ docker logs -f soroban-escrow-notifier-container
 docker stop soroban-escrow-notifier-container && docker rm soroban-escrow-notifier-container
 ```
 
+**NOTE:** Docker runs only the notifier worker. Goldsky pipeline and database setup must be done separately.
+
 ## Makefile
 
 Optional Makefile shortcuts:
@@ -124,19 +126,21 @@ make install            # Install dependencies
 make dev                # Run in development mode
 make build-local        # Build in production mode locally
 make start-local        # Build and start in production mode locally
+make typecheck          # Run type checker
 make build              # Build Docker image
 make run                # Build and run Docker container
 make stop               # Stop and remove container
 make logs               # View container logs
 make clean              # Stop container and remove image
 make migrate            # Run migrations
+make migrate-down       # Rollback last migration
 make migrate-list       # List migration status
 make generate-schema    # Generate TypeScript types for database tables
 make lint               # Run linter
+make lint-fix           # Run linter with auto-fix
+make format             # Format code
 make format-check       # Check formatting
 ```
-
-**NOTE:** Docker runs only the notifier worker. Goldsky pipeline and database setup must be done separately.
 
 ## Contributing
 
