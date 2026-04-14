@@ -30,22 +30,22 @@
   "license": "GPL-3.0-only",
   "dependencies": {
     "@stellar/stellar-sdk": "15.0.1",
-    "dotenv": "17.4.0",
-    "kysely": "0.28.15",
+    "dotenv": "17.4.2",
+    "kysely": "0.28.16",
     "pg": "8.20.0",
     "twitter-api-v2": "1.29.0"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "@types/node": "25.5.2",
+    "@types/node": "25.6.0",
     "@types/pg": "8.20.0",
     "eslint": "10.2.0",
     "eslint-config-prettier": "10.1.8",
     "kysely-codegen": "0.20.0",
-    "prettier": "3.8.1",
+    "prettier": "3.8.2",
     "ts-node": "10.9.2",
     "typescript": "6.0.2",
-    "typescript-eslint": "8.58.0"
+    "typescript-eslint": "8.58.2"
   },
   "pnpm": {
     "overrides": {
