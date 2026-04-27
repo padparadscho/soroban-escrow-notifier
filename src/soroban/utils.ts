@@ -77,8 +77,7 @@ export async function getEscrowBalance(): Promise<string> {
 
   if (rpc.Api.isSimulationSuccess(response) && response.result) {
     const resultVal = response.result.retval as unknown as xdr.ScVal;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-    return scValToNative(resultVal).toString() as string;
+    return String(scValToNative(resultVal));
   }
   return '0';
 }

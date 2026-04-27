@@ -98,7 +98,7 @@ export function parseEscrowEvent(raw: EventRow): EscrowEvent | null {
     escrowBalance: raw.escrow_balance,
     claimAfter,
     txHash: raw.transaction_hash ?? '',
-    ledger: Number(raw.ledger_sequence as unknown),
+    ledger: Number(raw.ledger_sequence),
     ledgerClosedAt: new Date(raw.ledger_closed_at as unknown as string),
   };
 }
@@ -114,9 +114,10 @@ export function parseTransferEvent(raw: TransferRow): TransferEvent {
     transferType: raw.transfer_type ?? '',
     sender: raw.sender ?? '',
     recipient: raw.recipient ?? '',
-    amount: raw.amount !== null ? String(raw.amount as unknown) : '0',
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    amount: raw.amount !== null ? String(raw.amount) : '0',
     txHash: raw.transaction_hash ?? '',
-    ledger: Number(raw.ledger_sequence as unknown),
+    ledger: Number(raw.ledger_sequence),
     ledgerClosedAt: new Date(raw.ledger_closed_at as unknown as string),
   };
 }
