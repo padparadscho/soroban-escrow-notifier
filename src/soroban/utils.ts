@@ -11,7 +11,6 @@ import {
   scValToNative,
   TransactionBuilder,
   TimeoutInfinite,
-  xdr,
 } from '@stellar/stellar-sdk';
 import { CONFIG } from '../config';
 
@@ -76,7 +75,7 @@ export async function getEscrowBalance(): Promise<string> {
   const response = await server.simulateTransaction(tx);
 
   if (rpc.Api.isSimulationSuccess(response) && response.result) {
-    const resultVal = response.result.retval as unknown as xdr.ScVal;
+    const resultVal = response.result.retval;
     return String(scValToNative(resultVal));
   }
   return '0';
