@@ -41,7 +41,7 @@ Track ongoing tasks and project progress through the [GitHub Project](https://gi
 
 - [Node.js](https://nodejs.org/) v20+
 - [pnpm](https://pnpm.io/) package manager
-- PostgreSQL database
+- Configured PostgreSQL database, see [soroban-escrow-database](https://github.com/padparadscho/soroban-escrow-database)
 - [Goldsky](https://goldsky.com/) account and CLI tool with Turbo extension
 - Access to a [Soroban RPC](https://developers.stellar.org/docs/data/apis/rpc/providers) endpoint
 
@@ -82,9 +82,6 @@ goldsky turbo apply pipelines/pipeline-mainnet.yaml
 5. Prepare the database schema:
 
 ```bash
-# Run all pending migrations up
-pnpm migrate
-
 # Generate TypeScript types for database tables
 pnpm generate-schema
 ```
@@ -140,9 +137,6 @@ make run                # Build and run Docker container
 make stop               # Stop and remove container
 make logs               # View container logs
 make clean              # Stop container and remove image
-make migrate            # Run migrations
-make migrate-down       # Rollback last migration
-make migrate-list       # List migration status
 make generate-schema    # Generate TypeScript types for database tables
 make lint               # Run linter
 make lint-fix           # Run linter with auto-fix
