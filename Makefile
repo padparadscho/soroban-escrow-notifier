@@ -1,4 +1,4 @@
-.PHONY: install dev build-local start-local typecheck build run stop logs clean migrate migrate-down migrate-list generate-schema lint lint-fix format format-check
+.PHONY: install dev build-local start-local typecheck build run stop logs clean generate-schema lint lint-fix format format-check
 
 IMAGE_NAME := soroban-escrow-notifier
 CONTAINER_NAME := soroban-escrow-notifier-container
@@ -32,15 +32,6 @@ logs:
 
 clean: stop
 	docker rmi $(IMAGE_NAME)
-
-migrate:
-	pnpm run migrate
-
-migrate-down:
-	pnpm run migrate:down
-
-migrate-list:
-	pnpm run migrate:list
 
 generate-schema:
 	pnpm run generate-schema
