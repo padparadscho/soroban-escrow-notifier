@@ -8,7 +8,6 @@
 
 [![Checks](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/checks.yml/badge.svg)](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/checks.yml)
 [![CodeQL Analysis](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/codeql-analysis.yml)
-[![Pipeline Validate](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/pipeline-validate.yml/badge.svg)](https://github.com/padparadscho/soroban-escrow-notifier/actions/workflows/pipeline-validate.yml)
 
 </div>
 
@@ -42,7 +41,7 @@ Track ongoing tasks and project progress through the [GitHub Project](https://gi
 - [Node.js](https://nodejs.org/) v20+
 - [pnpm](https://pnpm.io/) package manager
 - Configured PostgreSQL database, see [soroban-escrow-database](https://github.com/padparadscho/soroban-escrow-database)
-- [Goldsky](https://goldsky.com/) account and CLI tool with Turbo extension
+- Deployed Goldsky pipeline, see [soroban-escrow-database/pipelines](https://github.com/padparadscho/soroban-escrow-database/tree/main/pipelines)
 - Access to a [Soroban RPC](https://developers.stellar.org/docs/data/apis/rpc/providers) endpoint
 
 ### Installation
@@ -71,15 +70,7 @@ cp .env.example .env
 - For the `STELLAR_ASSET_CONTRACT_ID`, refer to the [stellar-asset-contract-deployer](https://github.com/padparadscho/stellar-asset-contract-deployer) repository **OR** use the [SHx SAC (Stellar Asset Contract)](https://stellar.expert/explorer/public/contract/CCKCKCPHYVXQD4NECBFJTFSCU2AMSJGCNG4O6K4JVRE2BLPR7WNDBQIQ) on mainnet.
 - (Optional) Set `DRY_RUN=true` to test without posting to enabled platforms.
 
-4. Deploy pipeline:
-
-```bash
-goldsky turbo apply pipelines/pipeline-mainnet.yaml
-```
-
-**NOTE:** Only new events and transactions will be processed after deployment, historical data will not be backfilled. Use the `pipeline-backfill`, adjust parameters if needed before deployment.
-
-5. Prepare the database schema:
+4. Prepare the database schema:
 
 ```bash
 # Generate TypeScript types for database tables
