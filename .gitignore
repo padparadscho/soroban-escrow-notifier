@@ -19,8 +19,5 @@ Thumbs.db
 # Docker
 docker-compose.override.yml
 
-# Pipelines
-pipelines/pipeline-testnet.yaml
-
 # GitHub Actions Local
 .actrc
