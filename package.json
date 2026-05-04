@@ -28,7 +28,7 @@
   "dependencies": {
     "@stellar/stellar-sdk": "15.0.1",
     "dotenv": "17.4.2",
-    "kysely": "0.28.16",
+    "kysely": "0.28.17",
     "pg": "8.20.0",
     "twitter-api-v2": "1.29.0"
   },
@@ -36,13 +36,13 @@
     "@eslint/js": "10.0.1",
     "@types/node": "25.6.0",
     "@types/pg": "8.20.0",
-    "eslint": "10.2.1",
+    "eslint": "10.3.0",
     "eslint-config-prettier": "10.1.8",
     "kysely-codegen": "0.20.0",
     "prettier": "3.8.3",
     "ts-node": "10.9.2",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.59.0"
+    "typescript-eslint": "8.59.1"
   },
   "pnpm": {
     "overrides": {
